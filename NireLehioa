@@ -1,7 +1,11 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class NireLehioa extends JFrame  {
     String[] fitxategiak ={"python.txt", "c.txt", "java.txt"};
@@ -9,7 +13,7 @@ public class NireLehioa extends JFrame  {
     JTextArea jt1 = new JTextArea("", 20,35);
     void NireLehioa(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600,400));
+        setPreferredSize(new Dimension(600,450));
         setLayout(new FlowLayout(FlowLayout.LEFT));
         box.setSelectedIndex(1);
         add(box);
@@ -21,18 +25,31 @@ public class NireLehioa extends JFrame  {
             }
         });
         JFileChooser java = new JFileChooser(".\\java.txt");
+        File javaF = new File(String.valueOf(java));
         JFileChooser c = new JFileChooser(".\\c.txt");
+        File cF = new File(String.valueOf(c));
         JFileChooser python = new JFileChooser(".\\python.txt");
+        File pythonF = new File(String.valueOf(python));
         box.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (box.getSelectedItem().equals("python.txt")) {
-                    jt1.setText(String.valueOf("aasdasasdasd"));
+                    try {
+                        Scanner sc = new Scanner(pythonF);
+                        while (sc.hasNextLine()){
+                            String data = sc.nextLine();
+                            jt1.insert(String.valueOf(data),0);
+                        }
+                        sc.close();
+                    }
+                    catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 } else if (box.getSelectedItem().equals("c.txt")) {
-                    jt1.setText(String.valueOf(c));
+                    jt1.setText("C (pronounced /ˈsiː/ – like the letter c)[6] is a general-purpose \n computer programming language. \n It was created in the 1970s by Dennis Ritchie, \n and remains very widely used and influential.");
                 }
                 else {
-                    jt1.setText(String.valueOf(java));
+                    jt1.setText("Java is a high-level, class-based, object-oriented \n programming language that is designed to have as few implementation \n dependencies as possible. It is a general-purpose \n programming language intended to let programmers write once, \n run anywhere (WORA), meaning that compiled Java \n code can run on all platforms that support Java without the need to recompile.");
                 }
 
             }
@@ -46,6 +63,12 @@ public class NireLehioa extends JFrame  {
         panel1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         getContentPane().add(panel1);
         JButton close = new JButton("Close");
+        close.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         add(close);
         pack();
         setVisible(true);
