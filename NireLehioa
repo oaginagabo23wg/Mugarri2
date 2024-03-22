@@ -1,17 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class NireLehioa extends JFrame {
+public class NireLehioa extends JFrame  {
+    String[] fitxategiak ={"python.txt", "c.txt", "java.txt"};
+    JComboBox box = new JComboBox(fitxategiak);
     void NireLehioa(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(600,400));
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        String[] fitxategiak ={"python.txt", "c.txt", "java.txt"};
-        JComboBox box = new JComboBox(fitxategiak);
         box.setSelectedIndex(1);
         add(box);
         JButton clear = new JButton("Clear");
         add(clear);
+        JScrollPane panel1 = new JScrollPane();
+        JTextArea jt1 = new JTextArea("...", 20,35);
+        setTitle("Nire aplikazioa");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        panel1.setViewportView(jt1);
+        panel1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        getContentPane().add(panel1);
+        JButton close = new JButton("Close");
+        add(close);
         pack();
         setVisible(true);
     }
