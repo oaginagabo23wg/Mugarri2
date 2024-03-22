@@ -1,0 +1,18 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class NireLehioa extends JFrame {
+    void NireLehioa(){
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(600,400));
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        String[] fitxategiak ={"python.txt", "c.txt", "java.txt"};
+        JComboBox box = new JComboBox(fitxategiak);
+        box.setSelectedIndex(1);
+        add(box);
+        JButton clear = new JButton("Clear");
+        add(clear);
+        pack();
+        setVisible(true);
+    }
+}
