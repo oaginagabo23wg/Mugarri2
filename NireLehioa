@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NireLehioa extends JFrame  {
     String[] fitxategiak ={"python.txt", "c.txt", "java.txt"};
     JComboBox box = new JComboBox(fitxategiak);
+    JTextArea jt1 = new JTextArea("", 20,35);
     void NireLehioa(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(600,400));
@@ -11,9 +14,32 @@ public class NireLehioa extends JFrame  {
         box.setSelectedIndex(1);
         add(box);
         JButton clear = new JButton("Clear");
+        clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jt1.setText("");
+            }
+        });
+        JFileChooser java = new JFileChooser(".\\java.txt");
+        JFileChooser c = new JFileChooser(".\\c.txt");
+        JFileChooser python = new JFileChooser(".\\python.txt");
+        box.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (box.getSelectedItem().equals("python.txt")) {
+                    jt1.setText(String.valueOf("aasdasasdasd"));
+                } else if (box.getSelectedItem().equals("c.txt")) {
+                    jt1.setText(String.valueOf(c));
+                }
+                else {
+                    jt1.setText(String.valueOf(java));
+                }
+
+            }
+        });
         add(clear);
         JScrollPane panel1 = new JScrollPane();
-        JTextArea jt1 = new JTextArea("...", 20,35);
+
         setTitle("Nire aplikazioa");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         panel1.setViewportView(jt1);
